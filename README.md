@@ -14,3 +14,10 @@ SQL Server 2016 Evalution,
 
 Sử dụng:
 + Reflaction...
++ Java Core
+
+Ouput: Chương trình giao diện được thiết kế bằng Java Swing.
+
+Ngày thực hiện: 05/11/2019
+
+Ngày hoàn thành: 06/11/2019
