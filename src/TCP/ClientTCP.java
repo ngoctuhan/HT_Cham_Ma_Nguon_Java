@@ -5,8 +5,10 @@
  */
 package TCP;
 
-import Object.FileInfo;
+import Model.FileInfo;
+import Utils.AnalysisClass;
 import java.io.BufferedInputStream;
+import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -29,6 +31,9 @@ public class ClientTCP {
     private  String SERVER_IP;
     private  int SERVER_PORT;
     private JOptionPane jOptionPane;
+    private AnalysisClass ac;
+    private String  result;
+    
 
     public ClientTCP(String SERVER_IP, int SERVER_PORT) {
         this.SERVER_IP = SERVER_IP;
@@ -50,7 +55,7 @@ public class ClientTCP {
         }
     }
     
-    public void sendFile(String sourceFilePath, String destinationDir)
+    public void sendFile(String sourceFilePath, String destinationDir, String Ex)
     {
 //        System.out.println("TCP.ClientTCP.sendFile()");
         
@@ -64,7 +69,7 @@ public class ClientTCP {
             
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(this.socket.getOutputStream());
             
-            FileInfo fileInfo = coverToFileInfo(sourceFilePath, destinationDir);
+            FileInfo fileInfo = coverToFileInfo(sourceFilePath, destinationDir, Ex);
 //            System.out.println("Done covert file to byte");
             
 //            System.out.println("Prepare send file to server\n" + fileInfo );
@@ -79,9 +84,21 @@ public class ClientTCP {
             if(fileInfo1 != null && fileInfo1.isStatus() ==  true )
                 System.out.println("Thành công");
             
+            
+            // Nhận về một object kết quả
+            objectInputStream = new ObjectInputStream(socket.getInputStream());
+            this.ac = (AnalysisClass) objectInputStream.readObject();
+            
+            // nhận kết quả của run file về
+            
+            DataInputStream dis = new DataInputStream(socket.getInputStream());
+            this.result = dis.readUTF();
+            
+            
             dataOutputStream.close();
             objectOutputStream.close();
             objectInputStream.close();
+            dis.close();
             
 //            textAreaLog.append("Done!" + "\n");
             
@@ -97,12 +114,17 @@ public class ClientTCP {
             } catch (IOException ex) {
                 Logger.getLogger(ClientTCP.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }
-        
-        
+        }  
     }
-
-    private FileInfo coverToFileInfo(String sourceFilePath, String destinationDir) {
+    public AnalysisClass getAnalys()
+    {
+        return this.ac;
+    }
+    public String getRequest()
+    {
+        return this.result;
+    }
+    private FileInfo coverToFileInfo(String sourceFilePath, String destinationDir, String Ex) {
         
         FileInfo fileInfo = null;
         BufferedInputStream bufferedInputStream = null;
@@ -115,6 +137,7 @@ public class ClientTCP {
             bufferedInputStream.read(fileBytes, 0, fileBytes.length);
             fileInfo.setFilename(sourceFile.getName());
             fileInfo.setDataBytes(fileBytes);
+            fileInfo.setEx(Ex);
             fileInfo.setDestinationDirectory(destinationDir);
             
         } catch (IOException ex) {

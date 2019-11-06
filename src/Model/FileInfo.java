@@ -1,4 +1,4 @@
-package Object;
+package Model;
 
 
 import java.io.Serializable;
@@ -24,6 +24,7 @@ public class FileInfo implements Serializable{
     private int lastByteLength;
     private byte[] dataBytes;
     private boolean status;
+    private String Ex;
 
     public FileInfo() {
     }
@@ -104,6 +105,15 @@ public class FileInfo implements Serializable{
         this.status = status;
     }
 
+    public String getEx() {
+        return Ex;
+    }
+
+    public void setEx(String Ex) {
+        this.Ex = Ex;
+    }
+    
+    
     @Override
     public String toString() {
         return "FileInfo{" + "destinationDirectory=" + destinationDirectory + ", sourceDirectory=" + sourceDirectory + ", filename=" + filename + ", fileSize=" + fileSize + ", piecesOfFile=" + piecesOfFile + ", lastByteLength=" + lastByteLength + ", dataBytes=" + dataBytes + ", status=" + status + '}';

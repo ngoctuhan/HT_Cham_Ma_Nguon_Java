@@ -5,7 +5,7 @@
  */
 package TCP;
 
-import Object.FileInfo;
+import Model.FileInfo;
 import Utils.WorkSendingThread;
 import java.io.BufferedOutputStream;
 import java.io.DataInputStream;

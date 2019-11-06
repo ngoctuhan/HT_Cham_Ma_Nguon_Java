@@ -11,6 +11,7 @@ import java.util.logging.Logger;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.Serializable;
 import java.lang.reflect.Field;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -20,34 +21,37 @@ import org.json.simple.JSONObject;
  *
  * @author trung
  */
-public class AnalysisClass {
+public class AnalysisClass implements Serializable{
     
-    private String nameclass;
+    private Class c;
 
-    public AnalysisClass(String nameclass) {
-        this.nameclass = nameclass;
+    public AnalysisClass(Class c) {
+        this.c = c;
+    }
+
+    public AnalysisClass() {
     }
     
     public String getName() throws ClassNotFoundException
     {
-        return Class.forName(this.nameclass).getSimpleName();
+        return c.getSimpleName();
     }
     
     public String getSuperClass() throws ClassNotFoundException
     {
-        Class<?> aSuperClass = Class.forName(this.nameclass).getSuperclass();
+        Class<?> aSuperClass = c.getSuperclass();
         return aSuperClass.getSimpleName();
     }
     
     public Class<?>[] getInterface() throws ClassNotFoundException
     {
-        Class<?>[] itfClasses = Class.forName(this.nameclass).getInterfaces();
+        Class<?>[] itfClasses = c.getInterfaces();
         return  itfClasses;
     }
     
     public Class<?>[] getParam() throws ClassNotFoundException, NoSuchMethodException
     {
-        Constructor<?> constructor = Class.forName(this.nameclass).getConstructor();
+        Constructor<?> constructor = c.getConstructor();
         Class<?>[] paramClasses = constructor.getParameterTypes();
         return paramClasses;
         
@@ -57,7 +61,7 @@ public class AnalysisClass {
     }
     public Field[] getFields() throws ClassNotFoundException
     {
-        Field[] fields = Class.forName(this.nameclass).getDeclaredFields();
+        Field[] fields = c.getDeclaredFields();
         
         return fields;
     }
@@ -65,11 +69,7 @@ public class AnalysisClass {
     {
        
         Method[] methods = null;
-        try {
-            methods = Class.forName(this.nameclass).getMethods();
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(AnalysisClass.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        methods = c.getMethods();
         return methods;
     }
    
