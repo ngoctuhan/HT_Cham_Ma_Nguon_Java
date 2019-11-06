@@ -9,8 +9,8 @@ Thực hiện chấm mã nguồn Java với input/ouput theo mô hình client/se
 Phân tích cây cấu trúc của Java Class
 
 + Môi trường phát triển
-Netbeans
-SQL Server 2016 Evalution
+Netbeans, 
+SQL Server 2016 Evalution,
 
 Sử dụng:
 + Reflaction...
