@@ -44,3 +44,9 @@ vị trí lưu trên máy chủ.
 + View là các lớp view sử dụng Java Swing.
 + Controlder là các lớp controler sử lí gửi nhận các yêu cầu cho view để hiện thị
 + Utils dùng để code các hàm bổ trợ trong quá trình chạy
+
+7. Chạy chương trình
+
++ Cần tạo databse trước 
+	- Gồm 2 bảng: Theo 2 object History và Acount
++ Chạy viewClient.
