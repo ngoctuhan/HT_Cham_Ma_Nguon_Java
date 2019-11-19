@@ -32,3 +32,15 @@ Công cụ hỗ trợ chấm tự động mã nguồn Java
 	+ Bắt thêm 1 số excerption.
 	+ Cải tiến hiệu năng runtime.
 	+ Phân tích file .java để đánh giá cấu trúc của code OOP.
+
+5. Mô tả triển khai
++ Chấm mã nguồn Java: Người dùng up file java thì hệ thống sẽ chấm file theo với đầu vào là 1 file input và cho ra một file out_pred sau đó sẽ được so sánh với output_True và đưa ra điểm số.
++ Admin có thể đăng nhập vào để thêm bài bằng việc add vào tên bài sau đó up 2 file input và output hệ thống tự tạo 2 file như vậy tại 
+vị trí lưu trên máy chủ.
+
+6. Cấu trúc của mã nguồn
+
++ DAO là package dùng để lấy dữ liệu từ databse.
++ View là các lớp view sử dụng Java Swing.
++ Controlder là các lớp controler sử lí gửi nhận các yêu cầu cho view để hiện thị
++ Utils dùng để code các hàm bổ trợ trong quá trình chạy
